@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GitDigital‑ZK Ecosystem — Release Notes v1.0.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0b0d14;
+      --card: #111320;
+      --accent: #5b8cff;
+      --accent-soft: rgba(91, 140, 255, 0.18);
+      --accent-strong: #8f9dff;
+      --text: #f5f7ff;
+      --muted: #a3acc7;
+      --border: #1b2033;
+      --danger: #ff4b81;
+      --success: #4cd3a8;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #151a33 0, #05060a 55%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 18px 64px;
+    }
+
+    header {
+      margin-bottom: 32px;
+      padding: 22px 22px 20px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #101326 0, #05060a 55%, #111320 100%);
+      border: 1px solid rgba(143, 157, 255, 0.35);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(91, 140, 255, 0.22), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(76, 211, 168, 0.16), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(143, 157, 255, 0.4);
+      background: rgba(5, 6, 10, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(76, 211, 168, 0.25);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 0.03em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    h1 span.version {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent-strong);
+      padding: 2px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(143, 157, 255, 0.6);
+      background: rgba(5, 6, 10, 0.85);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .meta-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .meta-row span {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(5, 6, 10, 0.8);
+      border: 1px solid rgba(27, 32, 51, 0.9);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.4fr);
+      gap: 22px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    section {
+      margin-bottom: 22px;
+      padding: 18px 18px 16px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, #090b14 0, #05060a 55%, #090b16 100%);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    section h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    section h3 {
+      margin: 14px 0 6px;
+      font-size: 15px;
+      color: #e3e6ff;
+    }
+
+    p {
+      margin: 6px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 6px 0 6px 18px;
+      padding: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 3px 0;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .repo-card {
+      margin-top: 10px;
+      padding: 10px 12px 10px;
+      border-radius: 10px;
+      background: radial-gradient(circle at top left, #151a33 0, #05060a 55%);
+      border: 1px solid rgba(91, 140, 255, 0.35);
+    }
+
+    .repo-title {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+      align-items: baseline;
+    }
+
+    .repo-title strong {
+      font-size: 14px;
+      color: #f5f7ff;
+    }
+
+    .repo-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(143, 157, 255, 0.5);
+      color: var(--accent-strong);
+      background: rgba(5, 6, 10, 0.9);
+    }
+
+    .repo-link {
+      font-size: 12px;
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(17, 19, 32, 0.95);
+      border: 1px solid rgba(27, 32, 51, 0.9);
+      color: var(--muted);
+    }
+
+    .side-section {
+      padding: 16px 16px 14px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top, #151a33 0, #05060a 55%);
+      border: 1px solid rgba(91, 140, 255, 0.35);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .side-section h2 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .pay-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .pay-card {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(5, 6, 10, 0.9);
+      border: 1px solid rgba(91, 140, 255, 0.4);
+    }
+
+    .pay-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .pay-link {
+      font-size: 13px;
+      font-family: var(--mono);
+      word-break: break-all;
+    }
+
+    .roadmap-list h3 {
+      margin-top: 10px;
+    }
+
+    .highlight {
+      color: var(--accent-strong);
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <div class="badge-row">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>GitDigital‑ZK Ecosystem</span>
+          </div>
+          <span>Zero‑Knowledge • Identity • Cryptography • AI Gateway • Orchestrators</span>
+        </div>
+
+        <h1>
+          GitDigital‑ZK — Ecosystem Release Notes
+          <span class="version">v1.0.0</span>
+        </h1>
+
+        <div class="subtitle">
+          Official v1.0.0 launch of the GitDigital‑ZK privacy, identity, and cryptography stack:
+          Aurora‑zk, zk‑Mask, zk‑Authorship, AI Gateway, and orchestration apps.
+        </div>
+
+        <div class="meta-row">
+          <span>Release Date: May 2026</span>
+          <span>Status: Stable — Production Ready</span>
+          <span>Scope: zk‑Cryptography • zk‑Identity • AI Gateway • Orchestrators • Payment Rails</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <div>
+        <section>
+          <h2>Overview</h2>
+          <p>
+            Version <strong class="highlight">1.0.0</strong> marks the official launch of the
+            <strong>GitDigital‑ZK ecosystem</strong> — a unified suite of zero‑knowledge cryptography tools,
+            identity frameworks, AI gateways, and zk‑powered automation apps.
+          </p>
+          <p>This release establishes:</p>
+          <ul>
+            <li>A <strong>zk‑native cryptography framework</strong> (Aurora‑zk)</li>
+            <li>A <strong>zk‑identity and authorship verification layer</strong></li>
+            <li>A <strong>zk‑masking + phone activation privacy stack</strong></li>
+            <li>An <strong>AI Gateway</strong> for Ollama‑powered inference</li>
+            <li>A <strong>zk‑orchestrator app</strong> for automation</li>
+            <li>Integrated <strong>payment rails</strong> (Cash App + PayPal)</li>
+          </ul>
+          <p>
+            This is the first complete zk‑stack release under the
+            <strong>GitDigital‑ZK</strong> organization.
+          </p>
+        </section>
+
+        <section>
+          <h2>Included repositories in v1.0.0</h2>
+
+          <!-- Aurora-zk -->
+          <div class="repo-card">
+            <div class="repo-title">
+              <strong>1. Aurora‑zk‑Cryptography‑Framework</strong>
+              <span class="repo-tag">Core Cryptography Engine</span>
+            </div>
+            <div class="repo-link">
+              Repo:
+              <a href="https://github.com/GitDigital-ZK/Aurora-zk-cryptography-framework" target="_blank" rel="noopener">
+                https://github.com/GitDigital-ZK/Aurora-zk-cryptography-framework
+              </a>
+            </div>
+            <p><strong>Purpose:</strong> The core cryptography engine powering all GitDigital‑ZK products.</p>
+            <h3>v1.0.0 Features</h3>
+            <ul>
+              <li>Modular zk‑SNARK/zk‑STARK abstraction layer</li>
+              <li>Proof generation + verification pipeline</li>
+              <li>Hashing, masking, and identity‑safe primitives</li>
+              <li>Developer‑ready cryptography SDK</li>
+              <li>Integration hooks for zk‑Identity, zk‑Mask, zk‑Authorship</li>
+            </ul>
+          </div>
+
+          <!-- ZK-Phone-Activate-mask -->
+          <div class="repo-card">
+            <div class="repo-title">
+              <strong>2. ZK‑Phone‑Activate‑Mask</strong>
+              <span class="repo-tag">Phone Privacy Stack</span>
+            </div>
+            <div class="repo-link">
+              Repo:
+              <a href="https://github.com/GitDigital-ZK/ZK-Phone-Activate-mask" target="_blank" rel="noopener">
+                https://github.com/GitDigital-ZK/ZK-Phone-Activate-mask
+              </a>
+            </div>
+            <p><strong>Purpose:</strong> A privacy‑preserving phone activation + masking system.</p>
+            <h3>v1.0.0 Features</h3>
+            <ul>
+              <li>zk‑masked phone verification</li>
+              <li>Zero‑knowledge activation proofs</li>
+              <li>Anti‑fraud masking layer</li>
+              <li>API endpoints for mobile onboarding</li>
+              <li>Integrates with zk‑Identity Vault</li>
+            </ul>
+          </div>
+
+          <!-- zk-authorship-license -->
+          <div class="repo-card">
+            <div class="repo-title">
+              <strong>3. zk‑Authorship‑License</strong>
+              <span class="repo-tag">Authorship & Licensing</span>
+            </div>
+            <div class="repo-link">
+              Repo:
+              <a href="https://github.com/GitDigital-ZK/zk-authorship-license" target="_blank" rel="noopener">
+                https://github.com/GitDigital-ZK/zk-authorship-license
+              </a>
+            </div>
+            <p>
+              <strong>Purpose:</strong> A zk‑powered authorship and licensing engine for creators, developers,
+              and AI‑generated content.
+            </p>
+            <h3>v1.0.0 Features</h3>
+            <ul>
+              <li>zk‑proof of authorship</li>
+              <li>zk‑license issuance + verification</li>
+              <li>Immutable authorship registry</li>
+              <li>API for apps, creators, and AI agents</li>
+              <li>GitHub‑native integration for commit authorship</li>
+            </ul>
+          </div>
+
+          <!-- AI-Gateway-Ollama -->
+          <div class="repo-card">
+            <div class="repo-title">
+              <strong>4. AI‑Gateway‑Ollama</strong>
+              <span class="repo-tag">AI Gateway</span>
+            </div>
+            <div class="repo-link">
+              Repo:
+              <a href="https://github.com/GitDigital-ZK/AI-Gateway-Ollama" target="_blank" rel="noopener">
+                https://github.com/GitDigital-ZK/AI-Gateway-Ollama
+              </a>
+            </div>
+            <p>
+              <strong>Purpose:</strong> A secure, zk‑aware AI gateway for running local or remote Ollama models.
+            </p>
+            <h3>v1.0.0 Features</h3>
+            <ul>
+              <li>Unified inference gateway</li>
+              <li>zk‑identity‑gated access</li>
+              <li>Token‑metered usage</li>
+              <li>Multi‑model routing</li>
+              <li>Developer‑friendly REST API</li>
+            </ul>
+          </div>
+
+          <!-- ZK-Mask-Orchestrator-app -->
+          <div class="repo-card">
+            <div class="repo-title">
+              <strong>5. ZK‑Mask‑Orchestrator‑App</strong>
+              <span class="repo-tag">Automation Layer</span>
+            </div>
+            <div class="repo-link">
+              Repo:
+              <a href="https://github.com/GitDigital-ZK/ZK-Mask-Orgestraror-app" target="_blank" rel="noopener">
+                https://github.com/GitDigital-ZK/ZK-Mask-Orgestraror-app
+              </a>
+            </div>
+            <p>
+              <strong>Purpose:</strong> The automation layer that orchestrates zk‑masking workflows across apps.
+            </p>
+            <h3>v1.0.0 Features</h3>
+            <ul>
+              <li>Event‑driven zk‑mask automation</li>
+              <li>Workflow builder for identity, phone, and authorship flows</li>
+              <li>Integration with Aurora‑zk cryptography</li>
+              <li>GitHub App automation hooks</li>
+              <li>Real‑time monitoring dashboard</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Highlights</h2>
+          <h3>Unified zk‑Identity Layer</h3>
+          <p>
+            All apps now share a single identity and proof standard, enabling consistent zk‑identity across
+            phone activation, authorship, and AI access.
+          </p>
+
+          <h3>AI‑Integrated</h3>
+          <p>
+            The AI Gateway connects zk‑identity with AI inference, allowing identity‑gated, metered access to
+            Ollama models and future AI backends.
+          </p>
+
+          <h3>Privacy‑First</h3>
+          <p>
+            Phone masking, authorship proofs, and cryptography all share the same Aurora‑zk core, ensuring
+            privacy‑preserving workflows by design.
+          </p>
+
+          <h3>Modular Architecture</h3>
+          <p>
+            Every repository is plug‑and‑play with Aurora‑zk, making it straightforward to extend the stack
+            with new zk‑apps and services.
+          </p>
+
+          <h3>Payment Rails Live</h3>
+          <p>
+            Cash App and PayPal are fully integrated for developer donations, sponsorships, and zk‑compute /
+            zk‑proof credit top‑ups.
+          </p>
+        </section>
+
+        <section class="roadmap-list">
+          <h2>Roadmap after v1.0.0</h2>
+
+          <h3>v1.1.0 — Automation & Scaling</h3>
+          <ul>
+            <li>zk‑Mask automation templates</li>
+            <li>AI Gateway model marketplace</li>
+            <li>zk‑Identity Vault UI</li>
+          </ul>
+
+          <h3>v1.2.0 — Developer Expansion</h3>
+          <ul>
+            <li>SDKs for JavaScript, Python, and Rust</li>
+            <li>Mobile onboarding kits</li>
+            <li>zk‑Authorship browser extension</li>
+          </ul>
+
+          <h3>v2.0.0 — Full zk‑Compute Network</h3>
+          <ul>
+            <li>zk‑Compute credits</li>
+            <li>zk‑Mining integration</li>
+            <li>Distributed prover network</li>
+          </ul>
+
+          <p class="footer-note">
+            This v1.0.0 release officially launches the
+            <strong>GitDigital‑ZK privacy, identity, and cryptography ecosystem</strong>. Every repository
+            listed above is part of a unified, interoperable zk‑stack designed for developers, creators, and
+            AI‑powered applications.
+          </p>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <aside>
+        <div class="side-section">
+          <h2>Integrated payment rails</h2>
+          <p>
+            Official payment endpoints for GitDigital‑ZK — used for donations, sponsorships, and zk‑compute
+            credit flows.
+          </p>
+
+          <div class="pay-row">
+            <div class="pay-card">
+              <div class="pay-label">Cash App</div>
+              <div class="pay-link">
+                <a href="https://cash.app/$GitDigital" target="_blank" rel="noopener">
+                  https://cash.app/$GitDigital
+                </a>
+              </div>
+            </div>
+
+            <div class="pay-card">
+              <div class="pay-label">PayPal</div>
+              <div class="pay-link">
+                <a href="https://www.paypal.me/GitDigitalZK" target="_blank" rel="noopener">
+                  https://www.paypal.me/GitDigitalZK
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pill-list" style="margin-top: 12px;">
+            <div class="pill">Developer donations</div>
+            <div class="pill">Sponsorships</div>
+            <div class="pill">API / zk‑Compute credits</div>
+            <div class="pill">Enterprise integrations</div>
+          </div>
+        </div>
+
+        <div class="side-section" style="margin-top: 18px;">
+          <h2>Release quick facts</h2>
+          <ul>
+            <li>Stack: zk‑Cryptography, Identity, AI Gateway, Orchestrators</li>
+            <li>Core engine: Aurora‑zk‑Cryptography‑Framework</li>
+            <li>AI: Ollama‑based Gateway with zk‑gated access</li>
+            <li>Focus: Privacy, authorship, and programmable zk‑workflows</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
