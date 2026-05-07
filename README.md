@@ -1,4 +1,6 @@
-# AI Gateway for Ollama
+# AI Gateway for Ollama<img width="500" height="500" alt="1246" src="https://github.com/user-attachments/assets/2ed762f9-a879-44af-a642-871e6ec48dba" />
+<img width="700" height="700" alt="1208" src="https://github.com/user-attachments/assets/33ba120e-b77d-4c9a-829a-2c9930382008" />
+
 
 ![Ollama](https://img.shields.io/badge/ollama-%23000000.svg?style=for-the-badge&logo=ollama&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
